@@ -14,10 +14,6 @@ export default class GameObject {
     this.gameObject = this.createGameObject(options);
   }
 
-  get getGameObject(){
-    return this.gameObject;
-  }
-
   private createGameObject(options: GameObjectProps) {
     return this.game.add([
       options.rect && this.game.rect(options.rect.width, options.rect.height),

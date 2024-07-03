@@ -12,7 +12,10 @@ export default class GameObject {
   constructor(game: KaboomCtx, options: GameObjectProps) {
     this.game = game;
     this.gameObject = this.createGameObject(options);
-    this.establishMovement();
+  }
+
+  get getGameObject(){
+    return this.gameObject;
   }
 
   private createGameObject(options: GameObjectProps) {
@@ -39,7 +42,7 @@ export default class GameObject {
     ]);
   }
 
-  private establishMovement(){
+  public establishMovement(){
     this.game.onKeyDown("right", () => {
       GameUtils.moveRight(this.gameObject);
     });

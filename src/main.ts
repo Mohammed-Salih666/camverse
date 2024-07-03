@@ -1,6 +1,7 @@
 import GameInstance from "./game/Game";
 
-const gameObject = {
+const gameObjectOptions = {
+  isMoving: true,
   position: {
     x: 120,
     y: 80
@@ -20,4 +21,4 @@ const gameObject = {
 
 const game = GameInstance.getGameInstance();
 game.loadAsset("bean", "src/sprites/bean.png");
-game.addGameObject(gameObject);
+game.addGameObject(gameObjectOptions);

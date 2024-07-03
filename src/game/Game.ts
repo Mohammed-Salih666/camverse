@@ -13,7 +13,10 @@ class Game {
   }
 
   public addGameObject(options: GameObjectProps) {
-    new GameObject(this.game, options);
+    const gameObject =  new GameObject(this.game, options);
+    if(options.isMoving){
+      gameObject.establishMovement();
+    }
   }
 }
 

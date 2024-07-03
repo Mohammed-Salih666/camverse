@@ -1,4 +1,5 @@
 export type GameObjectProps = {
+  isMoving: boolean;
   rect?: {
     width: number;
     height: number;

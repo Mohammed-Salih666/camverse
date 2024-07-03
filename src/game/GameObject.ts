@@ -25,9 +25,9 @@ export default class GameObject {
         this.game.body({ isStatic: options.bodyOptions.isStatic }),
       options.color &&
         this.game.color(
-          options.color.firstValue,
-          options.color.secondValue,
-          options.color.thirdValue,
+          options.color.R,
+          options.color.G,
+          options.color.B,
         ),
       options.offScreenOptions &&
         this.game.offscreen({

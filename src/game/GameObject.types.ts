@@ -13,9 +13,9 @@ export type GameObjectProps = {
     isStatic: boolean;
   }
   color?: {
-    firstValue: number;
-    secondValue: number;
-    thirdValue: number;
+    R: number;
+    G: number;
+    B: number;
   };
   offScreenOptions?: {
     hide?: boolean;

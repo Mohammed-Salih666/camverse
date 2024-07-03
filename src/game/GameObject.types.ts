@@ -23,5 +23,5 @@ export type GameObjectProps = {
     destroy?: boolean;
   };
   objectName?: string;
-  spriteName?: string;
+  assetName?: string;
 };

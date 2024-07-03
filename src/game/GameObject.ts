@@ -36,7 +36,7 @@ export default class GameObject {
           destroy: options.offScreenOptions.destroy,
         }),
       options.objectName && options.objectName,
-      options.spriteName && this.game.sprite(options.spriteName),
+      options.assetName && this.game.sprite(options.assetName),
     ]);
   }
 

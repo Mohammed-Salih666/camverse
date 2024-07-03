@@ -15,7 +15,7 @@ const gameObjectOptions = {
     destroy: false
   },
   objectName: "bean",
-  spriteName: "bean"
+  assetName: "bean"
 };
 
 

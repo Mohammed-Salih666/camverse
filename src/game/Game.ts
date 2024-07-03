@@ -1,5 +1,10 @@
+// Kaplay
 import startGame, { KaboomCtx } from "kaplay";
+
+// types
 import { GameObjectProps } from "./GameObject.types";
+
+// GameObject
 import GameObject from "./GameObject";
 
 class Game {

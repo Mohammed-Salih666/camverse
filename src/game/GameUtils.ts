@@ -1,3 +1,4 @@
+// kaplay
 import { GameObj } from "kaplay";
 
 export default class GameUtils {

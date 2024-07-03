@@ -3,6 +3,8 @@ import { GameObj, KaboomCtx } from "kaplay";
 
 // types
 import { GameObjectProps } from "./GameObject.types";
+
+// utils
 import GameUtils from "./GameUtils";
 
 export default class GameObject {

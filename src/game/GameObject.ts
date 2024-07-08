@@ -11,25 +11,33 @@ export default class GameObject {
   private gameObject: GameObj;
   private game: KaboomCtx;
 
-  constructor(game: KaboomCtx, options: GameObjectProps) {
+  constructor(game: KaboomCtx, options: GameObjectProps, isStaged: boolean) {
     this.game = game;
-    this.gameObject = this.createGameObject(options);
+    this.gameObject = this.handleGameObjectCreation(options, isStaged);
+    this.handleCameraPosition();
   }
 
-  private createGameObject(options: GameObjectProps) {
-    return this.game.add([
+  private handleGameObjectCreation(options: GameObjectProps, isStaged: boolean) {
+    const component = [
       options.rect && this.game.rect(options.rect.width, options.rect.height),
       this.game.pos(options.position.x, options.position.y),
       options.outline && this.game.outline(options.outline),
-      options.isCollidable && this.game.area(),
+      options.circle && this.game.circle(options.circle),
+      options.color &&
+        this.game.color(options.color.R, options.color.G, options.color.B),
+      options.opacity && this.game.opacity(options.opacity),
+      options.anchor && this.game.anchor(options.anchor),
+      options.scale && this.game.scale(options.scale.x, options.scale.y),
+      options.scaleUniformally && this.game.scale(options.scaleUniformally),
+      options.rotate && this.game.rotate(options.rotate),
+      options.zIndex && this.game.z(options.zIndex),
       options.bodyOptions &&
         this.game.body({ isStatic: options.bodyOptions.isStatic }),
-      options.color &&
-        this.game.color(
-          options.color.R,
-          options.color.G,
-          options.color.B,
-        ),
+      options.isCollidable && this.game.area(),
+      options.onClick &&
+        this.game.onClick(options.onClick.tag, options.onClick.action),
+      options.onHover &&
+        this.game.onHover(options.onHover.tag, options.onHover.action),
       options.offScreenOptions &&
         this.game.offscreen({
           hide: options.offScreenOptions.hide,
@@ -37,10 +45,25 @@ export default class GameObject {
         }),
       options.objectName && options.objectName,
       options.assetName && this.game.sprite(options.assetName),
-    ]);
+    ];
+    return isStaged ? this.game.make(component) : this.game.add(component);
   }
 
-  public establishMovement(){
+  public addAlreadyMadeGameObject(){
+    this.game.add(this.gameObject);
+  }
+
+  public handleCameraPosition() {
+    this.gameObject.onUpdate(() => {
+      this.game.camPos(this.gameObject.worldPos());
+    });
+  }
+
+  public getGameObject(){
+    return this.gameObject;
+  }
+
+  public establishMovement() {
     this.game.onKeyDown("right", () => {
       GameUtils.moveRight(this.gameObject);
     });

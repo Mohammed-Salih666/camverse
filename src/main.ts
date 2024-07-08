@@ -1,12 +1,12 @@
 import GameInstance from "./game/Game";
 
 import Grass from "./components/Grass";
-import { GameScene } from "./game/GameScene";
 
 //init game
 const game = GameInstance.getGameInstance();
-const k = game.getKObject(); 
-k.setBackground(k.rgb(64, 128, 255));
+game.setBackgroundColor(64, 128, 255);
+// const k = game.getKObject();
+// k.setBackground(k.rgb(64, 128, 255));
 
 //we always have to load the assets from main
 
@@ -40,17 +40,42 @@ const LEVEL = [
 const levelOptions = {
   tileWidth: 64, 
   tileHeight: 64, 
-  pos: k.vec2(110, 110), 
+  pos: game.getKObject().vec2(110, 110), 
   tiles: {
     "=": Grass.getComponents, 
     // "@": Player.getComponents, 
   }
 };
 
-//create new scene for the level
+const beanGameObject = {
+  isMoving: true,
+  circle: 32,
+  position: { x: 100, y: 150 },
+  isCollidable: true, // Enables collision detection
+  bodyOptions: { isStatic: false }, // Adds a dynamic physics body
+  color: { R: 255, G: 255, B: 255 }, // White color (if not using a sprite)
+  offScreenOptions: { hide: false, destroy: false }, // Hides when offscreen
+  objectName: "bean",
+  assetName: "bean",
+};
 
-const scene = new GameScene('game', LEVEL, levelOptions); 
-scene.init(); 
+const circleOption = {
+  isMoving: false,
+  circle: 32,
+  opacity: 0.3,
+  position: {x: 100, y: 150}
+}
+
+
+//create new scene for the level
+game.createScene("game", LEVEL, levelOptions, beanGameObject, false);
+// const scene = new GameScene('game', LEVEL, levelOptions); 
+// scene.init(); 
+game.scaleCamera(1.2, 1.2);
+
+const player = game.handleGameObjectCreation(circleOption, false);
+game.addGameObjectToLevel(player);
 
 //go to that scene
-k.go('game'); 
+// k.go('game'); 
+game.goToScene('game');
